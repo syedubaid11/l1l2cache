@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CacheService } from './cache.service';
-import { CacheController } from './cache.controller';
+import { RedisFactoryModule } from 'src/redis-factory/redis-factory.module';
+import { RedisFactoryService } from 'src/redis-factory/redis-factory.service';
 
 @Module({
-  providers: [CacheService],
-  controllers: [CacheController]
+  imports: [RedisFactoryModule],
 })
-export class CacheModule {}
+export class CacheModule {
+    constructor(private readonly redisFactoryService: RedisFactoryService) {}
+    
+}
